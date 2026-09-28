@@ -3,93 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Grammar Portal</title>
-    <!-- Tailwind CSS for modern layout styling -->
-    <script src="https://jsdelivr.net"></script>
+    <title>Dogeub</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        body { background-color: #0d0d12; color: #ffffff; font-family: system-ui, sans-serif; }
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at 50% 20%, rgba(45, 57, 90, 0.25), transparent 40%),
+                #0b1220;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Subtle background texture */
+        .background {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .12;
+            background-image:
+                radial-gradient(#64748b 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .app-button {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all .2s ease;
+            background: #202b3d;
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 5px 20px rgba(0,0,0,.25);
+        }
+
+        .app-button:hover {
+            transform: translateY(-4px) scale(1.06);
+            background: #2b374c;
+            box-shadow: 0 8px 25px rgba(0,0,0,.4);
+        }
+
+        .search-box {
+            background: #172235;
+            border: 1px solid #26344a;
+            box-shadow: 0 8px 30px rgba(0,0,0,.25);
+        }
+
+        .search-box:focus-within {
+            border-color: #475a78;
+            box-shadow: 0 0 0 3px rgba(71,90,120,.15);
+        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6">
 
-    <!-- Search Section -->
-    <div class="w-full max-w-2xl text-center mb-12">
-        <h1 class="text-4xl font-extrabold mb-3 tracking-tight bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-            Grammar Study Dashboard
-        </h1>
-        <p class="text-zinc-400 mb-6 text-sm">Enter an external resource link below to begin your reference research session.</p>
-        
-        <form id="proxy-form" class="flex gap-2 bg-[#161622] p-2 rounded-xl border border-zinc-800 focus-within:border-purple-500 transition-all">
-            <input type="text" id="url-input" placeholder="Type a website address or search string..." class="w-full bg-transparent px-4 py-2 outline-none text-zinc-200 placeholder-zinc-500">
-            <button type="submit" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg font-semibold transition-all shadow-lg shadow-purple-900/20">Go</button>
-        </form>
-    </div>
+<body class="flex items-center justify-center">
 
-    <!-- Application Shortcut Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl">
-        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://youtube.com')">
-            <div class="text-3xl mb-2 group-hover:animate-pulse">📺</div>
-            <h3 class="font-bold text-zinc-200">YouTube</h3>
+    <div class="background"></div>
+
+    <main class="relative z-10 w-full max-w-3xl px-6">
+
+        <!-- Logo -->
+        <div class="text-center mb-8">
+
+            <div class="flex items-center justify-center gap-2 mb-7">
+                <div class="text-4xl">⚡</div>
+
+                <h1 class="text-4xl font-bold tracking-tight">
+                    dogeub
+                </h1>
+            </div>
+
+            <!-- Search -->
+            <form id="proxy-form"
+                  class="search-box flex items-center rounded-full px-5 py-2 w-full max-w-xl mx-auto">
+
+                <span class="text-gray-400 text-lg mr-3">
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="url-input"
+                    placeholder="Search Google or type URL"
+                    class="flex-1 bg-transparent outline-none text-white placeholder-gray-500 text-sm"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="submit"
+                    class="text-gray-400 hover:text-white transition text-lg">
+                    ↵
+                </button>
+
+            </form>
         </div>
-        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://discord.com')">
-            <div class="text-3xl mb-2 group-hover:animate-pulse">💬</div>
-            <h3 class="font-bold text-zinc-200">Discord</h3>
+
+
+        <!-- Shortcut Apps -->
+        <div class="flex justify-center gap-7 flex-wrap mt-8">
+
+            <!-- Google -->
+            <div
+                class="text-center cursor-pointer"
+                onclick="launchApp('https://google.com')">
+
+                <div class="app-button mx-auto">
+                    <span>🌐</span>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-2">
+                    Google
+                </p>
+            </div>
+
+
+            <!-- Facebook -->
+            <div
+                class="text-center cursor-pointer"
+                onclick="launchApp('https://facebook.com')">
+
+                <div class="app-button mx-auto">
+                    <span>f</span>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-2">
+                    Facebook
+                </p>
+            </div>
+
+
+            <!-- Chrome -->
+            <div
+                class="text-center cursor-pointer"
+                onclick="launchApp('https://google.com/chrome')">
+
+                <div class="app-button mx-auto">
+                    <span>🌈</span>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-2">
+                    Chrome
+                </p>
+            </div>
+
+
+            <!-- GitHub -->
+            <div
+                class="text-center cursor-pointer"
+                onclick="launchApp('https://github.com')">
+
+                <div class="app-button mx-auto">
+                    <span>◉</span>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-2">
+                    GitHub
+                </p>
+            </div>
+
+
+            <!-- Home -->
+            <div
+                class="text-center cursor-pointer"
+                onclick="window.location.href='/'">
+
+                <div class="app-button mx-auto">
+                    <span>⌂</span>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-2">
+                    Home
+                </p>
+            </div>
+
         </div>
-        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://tiktok.com')">
-            <div class="text-3xl mb-2 group-hover:animate-pulse">🎵</div>
-            <h3 class="font-bold text-zinc-200">TikTok</h3>
-        </div>
-        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://google.com')">
-            <div class="text-3xl mb-2 group-hover:animate-pulse">🔍</div>
-            <h3 class="font-bold text-zinc-200">Google</h3>
-        </div>
-    </div>
+
+    </main>
+
 
     <script>
-        // YOUR LIVE BACKEND ROUTER ADDRESS
-        const BACKEND_PROXY_URL = "https://vercel.app";
+
+        /*
+         * Put your actual backend/proxy URL here.
+         *
+         * Example:
+         * const BACKEND_PROXY_URL = "https://your-project.vercel.app/";
+         */
+        const BACKEND_PROXY_URL = "https://vercel.app/";
+
 
         function launchApp(targetUrl) {
-            // Stealth tab initialization (about:blank wrapper)
-            const win = window.open('about:blank', '_blank');
+
+            const win = window.open("about:blank", "_blank");
+
             if (!win) {
-                alert('Pop-up blocked! Please click the pop-up blocker icon in your URL bar and allow pop-ups.');
+                alert(
+                    "Pop-up blocked! Please allow pop-ups for this website."
+                );
                 return;
             }
-            
-            // Format document canvas
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            win.document.body.style.overflow = 'hidden';
-            win.document.body.style.backgroundColor = '#000000';
-            
-            // Build viewport connection frame
-            const iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.margin = '0';
-            
-            // Encodes request endpoint string safely using basic obfuscation (Base64)
-            iframe.src = BACKEND_PROXY_URL + btoa(targetUrl); 
-            
+
+            win.document.body.style.margin = "0";
+            win.document.body.style.height = "100vh";
+            win.document.body.style.overflow = "hidden";
+            win.document.body.style.background = "#000";
+
+            const iframe = win.document.createElement("iframe");
+
+            iframe.style.border = "none";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+
+            /*
+             * Keep this only if your backend actually
+             * expects Base64 encoded URLs.
+             */
+            iframe.src =
+                BACKEND_PROXY_URL +
+                btoa(targetUrl);
+
             win.document.body.appendChild(iframe);
         }
 
-        // Search interface engine trigger
-        document.getElementById('proxy-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let inputUrl = document.getElementById('url-input').value.trim();
-            if (!inputUrl) return;
 
-            // Simple handling to check if it's a direct domain or a search query
-            if (!inputUrl.includes('.') || inputUrl.includes(' ')) {
-                inputUrl = 'https://google.com/search?q=' + encodeURIComponent(inputUrl);
-            } else if (!inputUrl.startsWith('http://') && !inputUrl.startsWith('https://')) {
-                inputUrl = 'https://' + inputUrl;
-            }
-            launchApp(inputUrl);
-        });
+        /*
+         * Search
+         */
+        document
+            .getElementById("proxy-form")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                let input =
+                    document
+                        .getElementById("url-input")
+                        .value
+                        .trim();
+
+                if (!input) return;
+
+
+                /*
+                 * If the user typed a normal search,
+                 * search Google.
+                 */
+                if (
+                    input.includes(" ") ||
+                    !input.includes(".")
+                ) {
+
+                    input =
+                        "https://www.google.com/search?q=" +
+                        encodeURIComponent(input);
+
+                }
+
+                /*
+                 * Add HTTPS when the user enters
+                 * example.com
+                 */
+                else if (
+                    !input.startsWith("http://") &&
+                    !input.startsWith("https://")
+                ) {
+
+                    input = "https://" + input;
+
+                }
+
+
+                launchApp(input);
+
+            });
+
     </script>
+
 </body>
 </html>
