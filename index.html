@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Portal</title>
+    <!-- Tailwind CSS for modern layout styling -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body { background-color: #0d0d12; color: #ffffff; font-family: system-ui, sans-serif; }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+
+    <!-- Search Section -->
+    <div class="w-full max-w-2xl text-center mb-12">
+        <h1 class="text-4xl font-extrabold mb-3 tracking-tight bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+            Grammar Study Dashboard
+        </h1>
+        <p class="text-zinc-400 mb-6 text-sm">Enter an external resource link below to begin your reference research session.</p>
+        
+        <form id="proxy-form" class="flex gap-2 bg-[#161622] p-2 rounded-xl border border-zinc-800 focus-within:border-purple-500 transition-all">
+            <input type="text" id="url-input" placeholder="Type a website address or search string..." class="w-full bg-transparent px-4 py-2 outline-none text-zinc-200 placeholder-zinc-500">
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg font-semibold transition-all shadow-lg shadow-purple-900/20">Go</button>
+        </form>
+    </div>
+
+    <!-- Application Shortcut Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl">
+        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://youtube.com')">
+            <div class="text-3xl mb-2 group-hover:animate-pulse">📺</div>
+            <h3 class="font-bold text-zinc-200">YouTube</h3>
+        </div>
+        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://discord.com')">
+            <div class="text-3xl mb-2 group-hover:animate-pulse">💬</div>
+            <h3 class="font-bold text-zinc-200">Discord</h3>
+        </div>
+        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://tiktok.com')">
+            <div class="text-3xl mb-2 group-hover:animate-pulse">🎵</div>
+            <h3 class="font-bold text-zinc-200">TikTok</h3>
+        </div>
+        <div class="bg-[#161622] p-6 rounded-2xl border border-zinc-800 text-center hover:scale-105 hover:border-zinc-700 transition-all cursor-pointer group" onclick="launchApp('https://google.com')">
+            <div class="text-3xl mb-2 group-hover:animate-pulse">🔍</div>
+            <h3 class="font-bold text-zinc-200">Google</h3>
+        </div>
+    </div>
+
+    <script>
+        // YOUR LIVE BACKEND ROUTER ADDRESS
+        const BACKEND_PROXY_URL = "https://vercel.app";
+
+        function launchApp(targetUrl) {
+            // Stealth tab initialization (about:blank wrapper)
+            const win = window.open('about:blank', '_blank');
+            if (!win) {
+                alert('Pop-up blocked! Please click the pop-up blocker icon in your URL bar and allow pop-ups.');
+                return;
+            }
+            
+            // Format document canvas
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            win.document.body.style.overflow = 'hidden';
+            win.document.body.style.backgroundColor = '#000000';
+            
+            // Build viewport connection frame
+            const iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.margin = '0';
+            
+            // Encodes request endpoint string safely using basic obfuscation (Base64)
+            iframe.src = BACKEND_PROXY_URL + btoa(targetUrl); 
+            
+            win.document.body.appendChild(iframe);
+        }
+
+        // Search interface engine trigger
+        document.getElementById('proxy-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let inputUrl = document.getElementById('url-input').value.trim();
+            if (!inputUrl) return;
+
+            // Simple handling to check if it's a direct domain or a search query
+            if (!inputUrl.includes('.') || inputUrl.includes(' ')) {
+                inputUrl = 'https://google.com/search?q=' + encodeURIComponent(inputUrl);
+            } else if (!inputUrl.startsWith('http://') && !inputUrl.startsWith('https://')) {
+                inputUrl = 'https://' + inputUrl;
+            }
+            launchApp(inputUrl);
+        });
+    </script>
+</body>
+</html>
